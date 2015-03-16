@@ -1,0 +1,8 @@
+<RCC>
+	<qresource prefix="/data/" >
+		<file>portraits/sheep.jpg</file>
+		<file>portraits/welshman.jpg</file>
+		<file>portraits/leeks.jpg</file>
+		<file>portraits/daffodils.jpg</file>
+	</qresource>
+</RCC>

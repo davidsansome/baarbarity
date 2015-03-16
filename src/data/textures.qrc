@@ -1,0 +1,14 @@
+<RCC>
+	<qresource prefix="/data/" >
+		<file>textures/grass.png</file>
+		<file>textures/rock.png</file>
+		<file>textures/grass_s.png</file>
+		<file>textures/rock_s.png</file>
+		<file>textures/sky-front.png</file>
+		<file>textures/sky-back.png</file>
+		<file>textures/sky-left.png</file>
+		<file>textures/sky-right.png</file>
+		<file>textures/sky-top.png</file>
+		<file>textures/waterdisplacementmaps.png</file>
+	</qresource>
+</RCC>

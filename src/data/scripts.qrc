@@ -1,0 +1,10 @@
+<RCC>
+	<qresource prefix="/data/" >
+		<file>scripts/sheep.qs</file>
+		<file>scripts/humansheep.qs</file>
+		<file>scripts/cpuwelsh.qs</file>
+		<file>scripts/buildings.qs</file>
+		<file>scripts/game.qs</file>
+		<file>scripts/welshman.qs</file>
+	</qresource>
+</RCC>

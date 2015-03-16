@@ -1,0 +1,14 @@
+<RCC>
+	<qresource prefix="/data/" >
+		<file>shaders/baseLayerFrag.glsl</file>
+		<file>shaders/baseLayerVert.glsl</file>
+		<file>shaders/billboardFrag.glsl</file>
+		<file>shaders/billboardVert.glsl</file>
+		<file>shaders/terrainFrag.glsl</file>
+		<file>shaders/terrainVert.glsl</file>
+		<file>shaders/waterFrag.glsl</file>
+		<file>shaders/waterVert.glsl</file>
+		<file>shaders/worldObjectFrag.glsl</file>
+		<file>shaders/worldObjectVert.glsl</file>
+	</qresource>
+</RCC>

@@ -1,0 +1,176 @@
+<ui version="4.0" >
+ <class>OptionsDialog</class>
+ <widget class="QWidget" name="OptionsDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>219</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Video options</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="QCheckBox" name="shadersBox" >
+     <property name="text" >
+      <string>Terrain shaders</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="waterShadersBox" >
+     <property name="text" >
+      <string>Water shaders</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="fogBox" >
+     <property name="text" >
+      <string>Use smooth fog</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_2" >
+       <property name="text" >
+        <string>Draw distance</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="drawDistance" >
+       <property name="minimum" >
+        <number>50</number>
+       </property>
+       <property name="maximum" >
+        <number>250</number>
+       </property>
+       <property name="value" >
+        <number>150</number>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Maximum FPS</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="maxFpsBox" >
+       <property name="text" >
+        <string/>
+       </property>
+       <property name="maxLength" >
+        <number>3</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="modelsBox" >
+     <property name="text" >
+      <string>Draw models</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="wireframeBox" >
+     <property name="text" >
+      <string>Draw wireframe terrain</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="originCubeBox" >
+     <property name="text" >
+      <string>Draw origin cube of mystery</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton" >
+       <property name="text" >
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>shadersBox</tabstop>
+  <tabstop>waterShadersBox</tabstop>
+  <tabstop>fogBox</tabstop>
+  <tabstop>drawDistance</tabstop>
+  <tabstop>maxFpsBox</tabstop>
+  <tabstop>modelsBox</tabstop>
+  <tabstop>wireframeBox</tabstop>
+  <tabstop>originCubeBox</tabstop>
+  <tabstop>closeButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,82 @@
+Rain cloud (10 devotion)
+Waters the grass in a small area beneath the cloud.  Sheep like freshly watered grass.
+Radius: 2
+Loyalty: +10
+Time: instant
+
+Plant daffodils (20 devotion, 2 or more sheep)
+Plants daffodil seeds in the earth.  Fully grown daffodils will distract passing welshmen.
+Radius: 6
+Charges: 1
+Time: 30 seconds
+
+Preach (30 devotion, 2 or more sheep)
+Tells another sheep about the almighty <player>.
+Loyalty: +50
+Time: 20 seconds
+
+Plant leeks (40 devotion, 4 or more sheep)
+Plants a seed in the earth that will grow into a giant leek.  More effective at distracting welshmen than daffodils.
+Radius: 10
+Charges: 2
+Time: 20 seconds
+
+Train engineer (200 devotion, 4 or more sheep)
+Teaches a sheep the fundamentals of engineering.  Engineers can equip other sheep with offensive weapons.
+Time: 90 seconds
+
+Attach laser cannons (20 devotion, engineering)
+Equips another sheep with the ability to defend itself against welshmen.
+Time: 15 seconds
+
+Upgrade lasers (100 devotion, engineering)
+Improves the range and accuracy of sheep's laser cannons.
+Time: 90 seconds
+
+Attach explosives (400 devotion, engineering)
+Equips another sheep with a high-powered explosive.
+Time: 120 seconds
+
+Train ninja (100 devotion, 6 or more sheep)
+Teaches a sheep in the art of subltety and disguise.  Ninjas are harder for welshmen to detect.
+Time: 90 seconds
+
+
+
+
+No context:
+Rain cloud
+Plant daffodils
+Plant leeks
+Train engineer
+Train ninja
+
+Sheep:
+Preach
+
+Engineer:
+Attach laser cannons
+Upgrade lasers
+Attach explosivess
+
+
+----------------------------------------------------
+
+
+Shearing shed - shears any nearby sheep.
+  Research upgrades
+
+Munitions center - equips sheep with weapons.
+  Lasers level 1
+  Grenades
+  Lasers level 2
+  Rockets
+  Lasers level 3
+  Explosives
+
+Vegetable engineering lab - produces giant vegetables that distract welshmen.
+  Daffodils
+  Leeks
+
+Propulsion facility
+  Jetpacks

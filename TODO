@@ -1,0 +1,3 @@
+* Arrange terrain tiles into a tree structure to improve culling speed
+* Make everything use Vec3, etc.
+* Only update the view frustum when the camera changes
