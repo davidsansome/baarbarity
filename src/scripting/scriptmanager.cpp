@@ -26,10 +26,10 @@
 #include <iostream>
 
 
-QScriptEngine ScriptManager::s_engine;
-ObjectMapClass<ObjectType> ScriptManager::s_objectTypesClass(&s_engine);
-ObjectMapClass<PlayerType> ScriptManager::s_playerTypesClass(&s_engine);
-ObjectMapClass<BuildingType> ScriptManager::s_buildingTypesClass(&s_engine);
+QScriptEngine* ScriptManager::s_engine;
+ObjectMapClass<ObjectType>* ScriptManager::s_objectTypesClass;
+ObjectMapClass<PlayerType>* ScriptManager::s_playerTypesClass;
+ObjectMapClass<BuildingType>* ScriptManager::s_buildingTypesClass;
 ObjectTypeMap ScriptManager::s_objectTypes;
 PlayerTypeMap ScriptManager::s_playerTypes;
 BuildingTypeMap ScriptManager::s_buildingTypes;
@@ -109,10 +109,10 @@ void ScriptManager::addClass(QScriptEngine::FunctionSignature ctor)
 	const char* superClassName = metaObj.superClass() ? metaObj.superClass()->className() : 0;
 	
 	// Create a constructor function
-	QScriptValue ctorValue = s_engine.newFunction(ctor);
+	QScriptValue ctorValue = s_engine->newFunction(ctor);
 	
 	// Create a prototype
-	QScriptValue prototype = s_engine.newObject();
+	QScriptValue prototype = s_engine->newObject();
 	
 	// If this class inherits something, set the parent prototype
 	if (superClassName && PrototypeStore::hasPrototype(superClassName))
@@ -121,34 +121,34 @@ void ScriptManager::addClass(QScriptEngine::FunctionSignature ctor)
 	// Store stuff
 	PrototypeStore::addPrototype(className, prototype);
 	ctorValue.setProperty("prototype", prototype);
-	s_engine.globalObject().setProperty(className, ctorValue);
+	s_engine->globalObject().setProperty(className, ctorValue);
 	
 	// Register converter functions
-	qScriptRegisterMetaType(&s_engine, qobjToScriptValue<Tp>, qobjFromScriptValue<Tp>);
+	qScriptRegisterMetaType(s_engine, qobjToScriptValue<Tp>, qobjFromScriptValue<Tp>);
 }
 
 template <typename T>
 void ScriptManager::addPrototype(QObject* prototype, QScriptEngine::FunctionSignature constructor, const QString& name)
 {
-	QScriptValue proto(s_engine.newQObject(prototype));
-	s_engine.setDefaultPrototype(qMetaTypeId<T>(), proto);
+	QScriptValue proto(s_engine->newQObject(prototype));
+	s_engine->setDefaultPrototype(qMetaTypeId<T>(), proto);
 	
-	QScriptValue ctor(s_engine.newFunction(constructor));
+	QScriptValue ctor(s_engine->newFunction(constructor));
 	ctor.setProperty("prototype", proto);
 	
 	QString typeName(name.isNull() ? QMetaType::typeName(qMetaTypeId<T>()) : name);
 	if (typeName.endsWith("*"))
 		typeName.chop(1);
 	
-	s_engine.globalObject().setProperty(typeName, ctor);
+	s_engine->globalObject().setProperty(typeName, ctor);
 }
 
 
 template <typename T>
 void ScriptManager::addObjectMap(const QString& name, ObjectMapClass<T>* clazz, QMap<QString, T*>* map)
 {
-	QScriptValue value = s_engine.newObject(clazz, s_engine.toScriptValue(map));
-	s_engine.globalObject().setProperty(name, value, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+	QScriptValue value = s_engine->newObject(clazz, s_engine->toScriptValue(map));
+	s_engine->globalObject().setProperty(name, value, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 }
 
 
@@ -167,7 +167,12 @@ QScriptValue randBetween(QScriptContext* context, QScriptEngine* engine)
 
 void ScriptManager::init(GameEngine* engine)
 {
-	PrototypeStore::setNullValue(s_engine.nullValue());
+	s_engine = new QScriptEngine;
+	s_objectTypesClass = new ObjectMapClass<ObjectType>(s_engine);
+	s_playerTypesClass = new ObjectMapClass<PlayerType>(s_engine);
+	s_buildingTypesClass = new ObjectMapClass<BuildingType>(s_engine);
+
+	PrototypeStore::setNullValue(s_engine->nullValue());
 	
 	qRegisterMetaType<Action*>("Action*");
 	qRegisterMetaType<GameState*>("GameState*");
@@ -202,14 +207,14 @@ void ScriptManager::init(GameEngine* engine)
 	addPrototype<QColor>(new ColorPrototype(), Color_ctor);
 	addPrototype<GameEngine*>(new EnginePrototype(engine), dummyCtor);
 	
-	addObjectMap("ObjectTypes", &s_objectTypesClass, &s_objectTypes);
-	addObjectMap("PlayerTypes", &s_playerTypesClass, &s_playerTypes);
-	addObjectMap("BuildingTypes", &s_buildingTypesClass, &s_buildingTypes);
+	addObjectMap("ObjectTypes", s_objectTypesClass, &s_objectTypes);
+	addObjectMap("PlayerTypes", s_playerTypesClass, &s_playerTypes);
+	addObjectMap("BuildingTypes", s_buildingTypesClass, &s_buildingTypes);
 	
-	s_engine.globalObject().setProperty("print", s_engine.newFunction(scriptDebug));
-	s_engine.globalObject().setProperty("randBetween", s_engine.newFunction(randBetween));
+	s_engine->globalObject().setProperty("print", s_engine->newFunction(scriptDebug));
+	s_engine->globalObject().setProperty("randBetween", s_engine->newFunction(randBetween));
 	
-	s_engine.globalObject().setProperty("Engine", s_engine.newQObject(engine));
+	s_engine->globalObject().setProperty("Engine", s_engine->newQObject(engine));
 }
 
 void ScriptManager::loadAllScripts()
@@ -230,19 +235,19 @@ void ScriptManager::loadScript(const QString& filename)
 	QTextStream stream(&scriptFile);
 	QString contents = stream.readAll();
 	scriptFile.close();
-	s_engine.evaluate(contents, filename);
+	s_engine->evaluate(contents, filename);
 	handleExceptions();
 }
 
 void ScriptManager::handleExceptions()
 {
-	if (s_engine.hasUncaughtException())
+	if (s_engine->hasUncaughtException())
 	{
-		QStringList backtrace(s_engine.uncaughtExceptionBacktrace());
+		QStringList backtrace(s_engine->uncaughtExceptionBacktrace());
 		
-		qDebug() << "QtScript Exception:" << s_engine.uncaughtException().toString();
+		qDebug() << "QtScript Exception:" << s_engine->uncaughtException().toString();
 		foreach (const QString& line, backtrace)
 			qDebug() << "    " << line;
-		s_engine.clearExceptions();
+		s_engine->clearExceptions();
 	}
 }

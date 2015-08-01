@@ -37,6 +37,7 @@ MilkshapeModel::MilkshapeModel(const QString& fileName)
 	file.open(QIODevice::ReadOnly);
 	QDataStream stream(&file);
 	stream.setByteOrder(QDataStream::LittleEndian);
+  stream.setVersion(QDataStream::Qt_4_2);
 	
 	// Skip header
 	stream.skipRawData(14);

@@ -55,10 +55,10 @@ private:
 	template <typename T>
 	static void addObjectMap(const QString& name, ObjectMapClass<T>* clazz, QMap<QString, T*>* map);
 	
-	static QScriptEngine s_engine;
-	static ObjectMapClass<ObjectType> s_objectTypesClass;
-	static ObjectMapClass<PlayerType> s_playerTypesClass;
-	static ObjectMapClass<BuildingType> s_buildingTypesClass;
+	static QScriptEngine* s_engine;
+	static ObjectMapClass<ObjectType>* s_objectTypesClass;
+	static ObjectMapClass<PlayerType>* s_playerTypesClass;
+	static ObjectMapClass<BuildingType>* s_buildingTypesClass;
 	static ObjectTypeMap s_objectTypes;
 	static PlayerTypeMap s_playerTypes;
 	static BuildingTypeMap s_buildingTypes;
